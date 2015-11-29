@@ -3,8 +3,10 @@ package com.example.priya.musicplayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.example.priya.musicplayer.Retrofit.RetrofitManager;
+import com.example.priya.musicplayer.adapter.ListViewAdapter;
 import com.example.priya.musicplayer.model.Model;
 import com.example.priya.musicplayer.model.ResponseGson;
 import com.google.gson.Gson;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -26,10 +30,20 @@ public class MainActivity extends AppCompatActivity {
 
     List<ResponseGson.Group> songs = new ArrayList<>();
 
+    @InjectView(R.id.albums)
+    ListView albums;
+
+    ListViewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+        getSongs();
+    }
+
+    private void getSongs() {
         RetrofitManager.getSlackServiceInstatnce().getPlaylists(new Callback<Model>() {
             @Override
             public void success(Model model, Response response) {
@@ -57,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
                 ResponseGson gson = new Gson().fromJson(result, ResponseGson.class);
                 songs = gson.getGroups();
-                songs.get(0).getTitle();
+                adapter = new ListViewAdapter(MainActivity.this,songs);
+                albums.setAdapter(adapter);
+
             }
 
             @Override
