@@ -75,14 +75,10 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private void getImageFromBase64(String imagePath) {
-//        if (imagePath.length() == 0 ){
-//            return context.getDrawable(R.drawable.record_album);
-//        }
 
         byte[] decodedString = Base64.decode(imagePath, Base64.DEFAULT);
         final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
          holder.image.setImageBitmap(getRoundedShape(decodedByte));
-//         new BitmapDrawable(context.getResources(), decodedByte);
     }
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
         int targetWidth = 50;
@@ -105,6 +101,13 @@ public class ListViewAdapter extends BaseAdapter {
                 new Rect(0, 0, sourceBitmap.getWidth(),
                         sourceBitmap.getHeight()),
                 new Rect(0, 0, targetWidth, targetHeight), null);
+        else {
+            sourceBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.record_album);
+            canvas.drawBitmap(sourceBitmap,
+                    new Rect(0, 0, sourceBitmap.getWidth(),
+                            sourceBitmap.getHeight()),
+                    new Rect(0, 0, targetWidth, targetHeight), null);
+        }
         return targetBitmap;
     }
 
