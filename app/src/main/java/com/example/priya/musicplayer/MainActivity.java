@@ -1,12 +1,18 @@
 package com.example.priya.musicplayer;
 
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.priya.musicplayer.Retrofit.RetrofitManager;
 import com.example.priya.musicplayer.adapter.ListViewAdapter;
+import com.example.priya.musicplayer.databinding.ListviewItemBinding;
 import com.example.priya.musicplayer.model.Model;
 import com.example.priya.musicplayer.model.ResponseGson;
 import com.google.gson.Gson;
@@ -28,11 +34,13 @@ import retrofit.client.Response;
 public class MainActivity extends AppCompatActivity {
 
 
-    List<ResponseGson.Group> songs = new ArrayList<>();
-
     @InjectView(R.id.albums)
-    ListView albums;
+    RecyclerView albums;
 
+    @InjectView(R.id.imageview)
+    ImageView img;
+
+    List<ResponseGson.Group> songs;
     ListViewAdapter adapter;
 
     @Override
@@ -41,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         getSongs();
+        songs = new ArrayList<>();
+        img.setBackground(getBackgroundDrawable(R.drawable.gradient_cranberry));
+    }
+    private Drawable getBackgroundDrawable(int resId) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        return new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(),resId, options));
+
     }
 
     private void getSongs() {
@@ -67,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 String result = sb.toString();
-                Log.e("response", "" + result);
 
                 ResponseGson gson = new Gson().fromJson(result, ResponseGson.class);
                 songs = gson.getGroups();
@@ -82,4 +97,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
