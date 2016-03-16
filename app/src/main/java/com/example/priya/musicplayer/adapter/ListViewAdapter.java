@@ -4,18 +4,15 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Path;
-import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.databinding.ListviewItemBinding;
 import com.example.priya.musicplayer.model.ResponseGson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +44,11 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         return items.size();
     }
 
-    private void getImageFromBase64(String imagePath) {
+    private Bitmap getImageFromBase64(String imagePath) {
 
-        byte[] decodedString = Base64.decode(imagePath, Base64.DEFAULT);
-        final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        byte[] str = (Base64.decode(imagePath, Base64.DEFAULT));
+        return BitmapFactory.decodeByteArray(str, 0, str.length);
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,8 +60,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             this.binding = binding;
         }
 
-        public void bindConnection(ResponseGson.Group group){
+        public void bindConnection(ResponseGson.Group group) {
             binding.setGroup(group);
+            binding.albumImage.setImageBitmap(getImageFromBase64(binding.getGroup().getImagePath()));
         }
     }
 }

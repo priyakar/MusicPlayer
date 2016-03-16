@@ -5,10 +5,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.priya.musicplayer.Retrofit.RetrofitManager;
 import com.example.priya.musicplayer.adapter.ListViewAdapter;
@@ -87,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 ResponseGson gson = new Gson().fromJson(result, ResponseGson.class);
                 songs = gson.getGroups();
                 adapter = new ListViewAdapter(MainActivity.this,songs);
+                albums.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 albums.setAdapter(adapter);
-
             }
 
             @Override
