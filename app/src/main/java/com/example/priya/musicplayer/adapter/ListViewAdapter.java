@@ -62,7 +62,8 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             this.binding = binding;
         }
 
-        public void bindConnection(ResponseGson.Group hy7
+        public void bindConnection(ResponseGson.Group group){
+            binding.setGroup(group);
         }
     }
 }
