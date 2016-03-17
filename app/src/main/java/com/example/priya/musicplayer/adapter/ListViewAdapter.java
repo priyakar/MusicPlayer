@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.databinding.ListviewItemBinding;
 import com.example.priya.musicplayer.model.ResponseGson;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
