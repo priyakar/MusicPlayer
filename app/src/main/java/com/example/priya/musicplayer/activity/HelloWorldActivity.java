@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.databinding.ActivityHelloWorldBinding;
-import com.example.priya.musicplayer.model.ViewModel;
+import com.example.priya.musicplayer.view_model.ViewModel;
 
 public class HelloWorldActivity extends AppCompatActivity {
 

@@ -6,15 +6,12 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.priya.musicplayer.Constants;
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.adapter.AlbumSongsAdapter;
-import com.example.priya.musicplayer.adapter.RecyclerViewAdapter;
 import com.example.priya.musicplayer.model.ResponseGson;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;

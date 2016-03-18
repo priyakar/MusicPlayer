@@ -1,4 +1,4 @@
-package com.example.priya.musicplayer.model;
+package com.example.priya.musicplayer.view_model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

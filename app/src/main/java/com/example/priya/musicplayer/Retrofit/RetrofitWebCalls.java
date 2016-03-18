@@ -1,6 +1,6 @@
 package com.example.priya.musicplayer.Retrofit;
 
-import com.example.priya.musicplayer.model.ViewModel;
+import com.example.priya.musicplayer.view_model.ViewModel;
 
 import retrofit.Callback;
 import retrofit.http.GET;

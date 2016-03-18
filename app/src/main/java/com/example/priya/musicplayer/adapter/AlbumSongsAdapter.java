@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.priya.musicplayer.R;
@@ -31,7 +30,8 @@ public class AlbumSongsAdapter extends RecyclerView.Adapter<AlbumSongsAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SongListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.song_list_item, parent, false);
+        SongListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent
+                .getContext()), R.layout.song_list_item, parent, false);
         return new ViewHolder(binding);
     }
 

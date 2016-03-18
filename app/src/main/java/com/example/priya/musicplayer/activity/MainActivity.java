@@ -11,14 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 
 import com.example.priya.musicplayer.Constants;
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.Retrofit.RetrofitManager;
 import com.example.priya.musicplayer.adapter.RecyclerViewAdapter;
 import com.example.priya.musicplayer.model.ResponseGson;
-import com.example.priya.musicplayer.model.ViewModel;
+import com.example.priya.musicplayer.view_model.ViewModel;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
