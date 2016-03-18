@@ -6,16 +6,16 @@ import android.os.Bundle;
 
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.databinding.ActivityHelloWorldBinding;
-import com.example.priya.musicplayer.model.Model;
+import com.example.priya.musicplayer.model.ViewModel;
 
 public class HelloWorldActivity extends AppCompatActivity {
 
-     Model model;
+     ViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityHelloWorldBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_hello_world);
-        model = new Model();
-        binding.setModel(model);
+        viewModel = new ViewModel();
+        binding.setViewModel(viewModel);
     }
 }

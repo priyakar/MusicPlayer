@@ -7,7 +7,7 @@ import android.text.TextWatcher;
 
 import com.example.priya.musicplayer.BR;
 
-public class Model extends BaseObservable {
+public class ViewModel extends BaseObservable {
 
     String name;
 
@@ -31,12 +31,15 @@ public class Model extends BaseObservable {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            setName(s.toString());
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            setName(s.toString());
+
         }
     };
 }
+
+
+

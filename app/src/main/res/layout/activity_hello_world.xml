@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="model"
-            type="com.example.priya.musicplayer.model.Model" />
+            name="viewModel"
+            type="com.example.priya.musicplayer.model.ViewModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
 
         <EditText
             android:layout_marginTop="50dp"
-            android:addTextChangedListener="@{model.textWatcher}"
+            android:addTextChangedListener="@{viewModel.textWatcher}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -28,7 +28,7 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.name}"
+            android:text="@{viewModel.name}"
             android:padding="@dimen/padding_text_view"/>
 
     </RelativeLayout>

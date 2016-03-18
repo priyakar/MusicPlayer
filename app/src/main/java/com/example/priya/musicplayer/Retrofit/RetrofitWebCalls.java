@@ -1,6 +1,6 @@
 package com.example.priya.musicplayer.Retrofit;
 
-import com.example.priya.musicplayer.model.Model;
+import com.example.priya.musicplayer.model.ViewModel;
 
 import retrofit.Callback;
 import retrofit.http.GET;
@@ -10,5 +10,5 @@ public interface RetrofitWebCalls {
 
     @GET("/tracks.json")
     void getPlaylists(
-            @Header("Content-Type: application/json") Callback<Model> callback);
+            @Header("Content-Type: application/json") Callback<ViewModel> callback);
 }

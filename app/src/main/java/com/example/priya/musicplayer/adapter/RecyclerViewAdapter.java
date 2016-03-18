@@ -7,24 +7,32 @@ import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.priya.musicplayer.R;
 import com.example.priya.musicplayer.databinding.ListviewItemBinding;
 import com.example.priya.musicplayer.model.ResponseGson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     List<ResponseGson.Group> items = new ArrayList<>();
     Context context;
+    GroupClickListener listener;
 
-    public ListViewAdapter(Context context, List<ResponseGson.Group> logEntryList) {
+    public RecyclerViewAdapter(Context context, List<ResponseGson.Group> logEntryList) {
         super();
         this.items = logEntryList;
         this.context = context;
+    }
+
+
+    public interface GroupClickListener {
+        void onGroupItemClick(int position);
     }
 
     @Override
@@ -61,7 +69,13 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
         public void bindConnection(ResponseGson.Group group) {
             binding.setGroup(group);
-            binding.albumImage.setImageBitmap(getImageFromBase64(binding.getGroup().getImagePath()));
+            Picasso.with(context).load(binding.getGroup().getImagePath()).into(binding.albumImage);
+            binding.listItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onGroupItemClick(getAdapterPosition());
+                }
+            });
         }
     }
 }
