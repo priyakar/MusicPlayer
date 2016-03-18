@@ -14,6 +14,7 @@ import com.example.priya.musicplayer.adapter.AlbumSongsAdapter;
 import com.example.priya.musicplayer.adapter.RecyclerViewAdapter;
 import com.example.priya.musicplayer.model.ResponseGson;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +30,17 @@ public class AlbumSongsActivity extends AppCompatActivity {
     AlbumSongsAdapter adapter;
     ResponseGson gson;
     int positionNum;
-    RecyclerViewAdapter.GroupClickListener listener;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+        positionNum = getIntent().getIntExtra(Constants.POSITION_RECYCLER_VIEW, 0);
         songsList = new ArrayList<>();
-        listener = new RecyclerViewAdapter.GroupClickListener() {
-            @Override
-            public void onGroupItemClick(int position) {
-                positionNum = position;
-            }
-        };
-        gson = new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(Constants.SHARED_PREFS_JSON, null), ResponseGson.class);
+        Gson gsonObj = new Gson();
+        SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(this);
+        String json = preferenceManager.getString(Constants.SHARED_PREFS_JSON, "");
+        gson = gsonObj.fromJson(json, ResponseGson.class);
         songsList = gson.getGroups().get(positionNum).getItems();
         adapter = new AlbumSongsAdapter(this, songsList);
         songs.setLayoutManager(new LinearLayoutManager(AlbumSongsActivity.this));

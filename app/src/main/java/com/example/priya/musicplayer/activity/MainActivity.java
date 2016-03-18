@@ -1,5 +1,6 @@
 package com.example.priya.musicplayer.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -34,24 +35,26 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @InjectView(R.id.albums)
     RecyclerView albums;
     List<ResponseGson.Group> songs;
     RecyclerViewAdapter adapter;
+    RecyclerViewAdapter.GroupClickListener listener;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        albums.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        getSongs();
         songs = new ArrayList<>();
+        listener = new RecyclerViewAdapter.GroupClickListener() {
+            @Override
+            public void onGroupItemClick(int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.POSITION_RECYCLER_VIEW, position);
+                startActivity(new Intent(MainActivity.this, AlbumSongsActivity.class).putExtras(bundle));
+            }
+        };
+        getSongs();
     }
 
     private Drawable getBackgroundDrawable(int resId) {
@@ -88,11 +91,12 @@ public class MainActivity extends AppCompatActivity {
 
                 ResponseGson gson = new Gson().fromJson(result, ResponseGson.class);
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
-                editor.putString(Constants.SHARED_PREFS_JSON, gson.toString()).apply();
+                editor.putString(Constants.SHARED_PREFS_JSON, result).apply();
                 songs = gson.getGroups();
                 adapter = new RecyclerViewAdapter(MainActivity.this, songs);
                 albums.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 albums.setAdapter(adapter);
+                adapter.setListener(listener);
             }
 
             @Override

@@ -73,9 +73,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             binding.listItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onGroupItemClick(getAdapterPosition());
+                    if (listener != null) {
+                        listener.onGroupItemClick(getAdapterPosition());
+                    }
                 }
             });
         }
+    }
+
+    public void setListener(GroupClickListener listener) {
+        this.listener = listener;
     }
 }

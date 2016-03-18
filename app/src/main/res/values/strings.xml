@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="open_music_list">Open Music List</string>
+    <string name="open_hello_world">Open Hello World</string>
 </resources>

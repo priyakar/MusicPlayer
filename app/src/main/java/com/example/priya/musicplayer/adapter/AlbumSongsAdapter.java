@@ -18,21 +18,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumSongsAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class AlbumSongsAdapter extends RecyclerView.Adapter<AlbumSongsAdapter.ViewHolder> {
 
     List<ResponseGson.Item> items = new ArrayList<>();
     Context context;
-    GroupClickListener listener;
 
     public AlbumSongsAdapter(Context context, List<ResponseGson.Item> logEntryList) {
         super();
         this.items = logEntryList;
         this.context = context;
-    }
-
-
-    public interface GroupClickListener {
-        void onGroupItemClick(int position);
     }
 
     @Override
@@ -70,12 +64,6 @@ public class AlbumSongsAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.
         public void bindConnection(ResponseGson.Item item) {
             binding.setItem(item);
             Picasso.with(context).load(binding.getItem().getImagePath()).into(binding.songImage);
-            binding.listItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onGroupItemClick(getAdapterPosition());
-                }
-            });
         }
     }
 }
